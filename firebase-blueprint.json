@@ -1,0 +1,76 @@
+{
+  "entities": {
+    "user": {
+      "title": "User Profile",
+      "description": "User profile with authentication and municipal role",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["citizen", "officer", "engineer"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "complaint": {
+      "title": "Citizen Complaint",
+      "description": "Municipal complaint filed by citizen or ward telemetry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "category": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "area": { "type": "string" },
+        "zone": { "type": "string" },
+        "ward": { "type": "number" },
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" },
+        "severity": { "type": "string" },
+        "status": { "type": "string" },
+        "clusterId": { "type": "string" },
+        "citizenName": { "type": "string" },
+        "citizenPhone": { "type": "string" },
+        "photoUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "category", "area", "latitude", "longitude"]
+    },
+    "cluster": {
+      "title": "Recurrence Cluster",
+      "description": "Group of correlated complaints forming a recurring hotspot",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "area": { "type": "string" },
+        "zone": { "type": "string" },
+        "ward": { "type": "number" },
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" },
+        "recurrenceCount": { "type": "number" },
+        "priorityScore": { "type": "number" },
+        "status": { "type": "string" },
+        "isPostRepairRecurrence": { "type": "boolean" },
+        "lastRepairedAt": { "type": "string" }
+      },
+      "required": ["id", "title", "area", "priorityScore"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "user",
+      "description": "Stores user profiles with authentication roles"
+    },
+    "/complaints/{complaintId}": {
+      "schema": "complaint",
+      "description": "Public and citizen filed municipal complaints"
+    },
+    "/clusters/{clusterId}": {
+      "schema": "cluster",
+      "description": "Civic recurrence clusters and hotspot intelligence"
+    }
+  }
+}

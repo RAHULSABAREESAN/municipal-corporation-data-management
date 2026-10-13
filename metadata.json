@@ -1,0 +1,6 @@
+{
+  "name": "CivicLoop AI",
+  "description": "AI-powered municipal complaint recurrence intelligence system for Chennai, detecting chronic civic hotspots, root-cause hypotheses, and verified inspection repair workflows.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
